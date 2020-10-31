@@ -19,9 +19,9 @@ if (empty($_SESSION['userdata'])) {
     header('location:index.php');
 }
 $session=$_SESSION['sessionid'];
-$a="SELECT * from answer where `test_id`=$id && `sessionid`=$session";
+$a="SELECT * from answer where `test_id`='$id' && `sessionid`='$session'";
 $result=mysqli_query($con, $a);
-while ($rows=mysqli_fetch_array($result)) {
+while ($rows=mysqli_fetch_assoc($result)) {
     if ($rows['userans']==$rows['crtans']) {
             $yousecured=$yousecured+$mr;
     }    
