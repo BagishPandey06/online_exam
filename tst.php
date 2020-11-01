@@ -21,7 +21,6 @@ if (empty($_SESSION['userdata'])) {
     echo "<script>alert('login first')</script>";
     header('location:index.php');
 }
-
 $session=$_SESSION['sessionid'];
 if (isset($_GET['page'])) {
         $page=$_GET['page'];
@@ -41,15 +40,6 @@ if (isset($_POST['submit'])) {
         $opt4=isset($_POST['opt4'])?$_POST['opt4']:'';
         $ans=isset($_POST['ans'])?$_POST['ans']:'';
         $userans=$_POST['selected'];
-    
-        $SQL="DELETE FROM answer WHERE `sessionid`=$session &&
-         question=$qt";
-        $RESULT=$con->query($SQL);
-    if ($RESULT === true) {
-        //echo 'ok';
-    } else {
-        $errors= array('input' => 'form', 'msg'=> $con->error);
-    }
     $sql="INSERT into answer 
     (`id`,`sessionid`, `test_id`, 
     `que_id`,`question`,`opt1`, `opt2`,`opt3`,
@@ -60,14 +50,14 @@ if (isset($_POST['submit'])) {
     '".$opt1."','".$opt2."','".$opt3."',
     '".$opt4."','".$ans."','".$userans."')";
     if ($con-> query($sql) === true) {
-        //echo 'ok';
+        
     } else {
         $errors= array('input' => 'form', 'msg'=> $con->error);
     }
 }
-    $sql3="Select * from ques where `test_id`='".$id."'";
-    $result3=$con->query($sql3);
-    $count=$result3->num_rows;
+    $s="Select * from ques where `test_id`='".$id."'";
+    $r=$con->query($s);
+    $count=$r->num_rows;
     $tp=ceil($count/$nopage);
 if ($page>$tp) {
     header("location:result.php?id=$id");   
@@ -85,8 +75,8 @@ if ($result->num_rows>0) {
         $ans=$row['crtans'];
 ?>
 <form action="tst.php?page=<?php echo ($page+1);?>&id=<?php echo$id;?>" method=POST>
-      <p id="ques">Q.<?php echo $page;?> <?php echo $qt;?></p>
-      <p id="radioques">
+      <p>Q.<?php echo $page;?> <?php echo $qt;?></p>
+      <p>
       <input type="hidden" name="quesid" value="<?php echo $qid;?>">
       <input type="hidden" name="ques"   value="<?php echo $qt;?>">
       <input type="hidden" name="opt1"   value="<?php echo $opt1;?>">
@@ -99,8 +89,8 @@ if ($result->num_rows>0) {
     <?php
         $sql2="SELECT * from answer where `sessionid`='".$session."' &&
        question='".$qt."'";
-        $result2=$con->query($sql2);
-    if (mysqli_num_rows($result2)>0) {
+        $r=$con->query($sql2);
+    if (mysqli_num_rows($r)>0) {
         while ($rows2=$result2->fetch_assoc()) {
                 $Ans=$rows2['userans'];
         }
@@ -118,14 +108,14 @@ if ($result->num_rows>0) {
         <input  type="submit" name="submit" value="Next">
         <?php endif; ?>
         <?php if ($page>1 && $page!=$tp) :?>
-        <?php echo "<a id='NP' href='tst.php?page=".($page-1)."&id=".$id."'>
+        <?php echo "<a  href='tst.php?page=".($page-1)."&id=".$id."'>
         Previous</a>";?>
         <input  type="submit" name="submit" value="Next">
         <?php endif ?>
         <?php if ($page>1 && $page==$tp) :?>
-        <?php echo "<a id='NP' href='tst.php?page=".($page-1)."&id=".$id."'>
+        <?php echo "<a  href='tst.php?page=".($page-1)."&id=".$id."'>
         Previous</a>";?>
-        <input  type="submit" name="submit" value="Finish">
+        <input  type="submit" name="submit" value="complete">
         <?php endif;?>
                 </p>
 </form>

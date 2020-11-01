@@ -18,7 +18,8 @@ if (empty($_SESSION['userdata'])) {
     echo "<script>window.location='index.php';</script>";
 }
 ?>
-<h2><center>Test avilable for you</center></h2>    
+<h2><center>Test avilable for you</center></h2>
+<div id="tab">    
 <table border=1px; align=center;>
             <tr><th>Test Name</th><th>Test action</th></tr>
             <?php
@@ -34,4 +35,6 @@ if (empty($_SESSION['userdata'])) {
         <?php 
             };
         ?>
-    </html>
+        </table>
+        </div>
+    <?php require 'footer.php';?>

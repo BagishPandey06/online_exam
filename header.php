@@ -19,7 +19,7 @@ session_start();
         <link rel="stylesheet" type="text/css" href="admin/style.css">
     </head>
     <body>
-      
+      <div id="wrapper">
     <h1>ONLINE-TEST</h1>
         <ul>
             <li id="j" class="dropdown">

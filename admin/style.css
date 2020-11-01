@@ -69,6 +69,7 @@ padding-left: 50px;
 {
   text-align: center;
   background-color: rgb(115, 233, 248);
+  opacity: 0.9;
 }
 #wrapper input{
   height: 25px;
@@ -85,4 +86,23 @@ padding-left: 50px;
 #error
 {
   color:greenyellow;
+}
+#foot
+{
+  color: cyan;
+  width:1350px;
+}
+#foot p{
+  margin-left:600px;
+}
+#tab
+{ 
+  width:550px;
+  height: 350px;
+  background-color: darkolivegreen;
+  margin-left:500px;
+}
+#tab td,th
+{
+  padding:10px;
 }

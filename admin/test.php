@@ -17,6 +17,7 @@ $r=mysqli_query($con, $a);
 $ro=mysqli_num_rows($r);
 if ($ro>0) {
 ?>
+<div id="tab">
     <table>
  <tr><th>test_id</th><th class="ga">testname</th><th class="ga">questions</th>
  <th colspan="2">ACTION</th></tr>
@@ -39,6 +40,7 @@ if ($ro>0) {
                 }
             ?>              
             </table>
+            </div>
             
 <?php 
 } else {

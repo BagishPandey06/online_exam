@@ -10,9 +10,9 @@
  */
 ?>
 </div>
-<ul style="color:cyan;">
-            <li class="dropdown">
-                online@test
+<ul >
+            <li class="dropdown"id="foot">
+                <p>online@test</p>
         </li>
         </ul>
 </div>
