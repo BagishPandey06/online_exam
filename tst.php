@@ -10,13 +10,10 @@
  */
 require 'admin/config.php';
 require 'header.php';
-global $id;
+global $id,$nopage,$tp,$sp,$qt,$opt1,$opt2,$opt3,$opt4,$ans,$userans,$Ans;
 $id=$_REQUEST['id'];
 $page=1;
-global $nopage;
-global $tp;
-$sp;
-global $qt,$opt1,$opt2,$opt3,$opt4,$ans,$userans,$Ans;
+
 if (empty($_SESSION['userdata'])) {
     echo "<script>alert('login first')</script>";
     header('location:index.php');
@@ -39,7 +36,7 @@ if (isset($_POST['submit'])) {
         $opt3=isset($_POST['opt3'])?$_POST['opt3']:'';
         $opt4=isset($_POST['opt4'])?$_POST['opt4']:'';
         $ans=isset($_POST['ans'])?$_POST['ans']:'';
-        $userans=$_POST['selected'];
+        $userans=$_POST['select'];
     $sql="INSERT into answer 
     (`id`,`sessionid`, `test_id`, 
     `que_id`,`question`,`opt1`, `opt2`,`opt3`,
@@ -84,38 +81,38 @@ if ($result->num_rows>0) {
       <input type="hidden" name="opt3"   value="<?php echo $opt3;?>">
       <input type="hidden" name="opt4"   value="<?php echo $opt4;?>">
       <input type="hidden" name="ans"    value="<?php echo $ans;?>">
-      <input type="hidden" name="selected" value="0">
+      <input type="hidden" name="select" value="0">
 
     <?php
         $sql2="SELECT * from answer where `sessionid`='".$session."' &&
        question='".$qt."'";
         $r=$con->query($sql2);
     if (mysqli_num_rows($r)>0) {
-        while ($rows2=$result2->fetch_assoc()) {
-                $Ans=$rows2['userans'];
+        while ($ro=$r->fetch_assoc()) {
+                $Ans=$ro['userans'];
         }
     }
     ?>
-    <input type="radio" name="selected" value="1" id="opt1" <?php if ($Ans==1) :?>
+    <input type="radio" name="select" value="1" id="opt1" <?php if ($Ans==1) :?>
     checked<?php endif;?>><?php echo $opt1;?><br>
-    <input type="radio" name="selected" value="2" id="opt2" <?php if ($Ans==2) :?>
+    <input type="radio" name="select" value="2" id="opt2" <?php if ($Ans==2) :?>
     checked<?php endif;?>><?php echo $opt2;?><br>
-    <input type="radio" name="selected" value="3" id='opt3' <?php if ($Ans==3) :?>
+    <input type="radio" name="select" value="3" id='opt3' <?php if ($Ans==3) :?>
     checked<?php endif?>><?php echo $opt3;?><br>
-    <input type="radio" name="selected" value="4" id="opt4" <?php if ($Ans==4) :?>
+    <input type="radio" name="select" value="4" id="opt4" <?php if ($Ans==4) :?>
     checked<?php endif;?>><?php echo $opt4;?><br>
         <?php if ($page ==1) :?>
         <input  type="submit" name="submit" value="Next">
         <?php endif; ?>
         <?php if ($page>1 && $page!=$tp) :?>
-        <?php echo "<a  href='tst.php?page=".($page-1)."&id=".$id."'>
-        Previous</a>";?>
+        <a  href='tst.php?page=<?php echo $page-1;?>&id=<?php echo $id?>'>
+        Previous</a>
         <input  type="submit" name="submit" value="Next">
         <?php endif ?>
         <?php if ($page>1 && $page==$tp) :?>
-        <?php echo "<a  href='tst.php?page=".($page-1)."&id=".$id."'>
-        Previous</a>";?>
-        <input  type="submit" name="submit" value="complete">
+         <a  href='tst.php?page=<?php echo $page-1;?>&id=<?php echo $id;?>'>
+        Previous</a>
+        <input  type="submit" name="submit" value="get result">
         <?php endif;?>
                 </p>
 </form>
