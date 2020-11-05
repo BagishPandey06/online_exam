@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
     `opt4`,`crtans`,`userans`) 
     VALUES 
     ('".$_SESSION['userdata']['id']."','".$session."',
-    '".$id."', '".$qid."', '".$qt."', 
+    '".$id."','".$qid."','".$qt."', 
     '".$opt1."','".$opt2."','".$opt3."',
     '".$opt4."','".$ans."','".$userans."')";
     if ($con-> query($sql) === true) {
@@ -52,14 +52,14 @@ if (isset($_POST['submit'])) {
         $errors= array('input' => 'form', 'msg'=> $con->error);
     }
 }
-    $s="Select * from ques where `test_id`='".$id."'";
+    $s="SELECT * from ques where `test_id`='".$id."'";
     $r=$con->query($s);
     $count=$r->num_rows;
     $tp=ceil($count/$nopage);
 if ($page>$tp) {
     header("location:result.php?id=$id");   
 }
-$sql="Select * from ques where `test_id`='".$id."' limit $sp,$nopage ";
+$sql="SELECT * from ques where `test_id`='".$id."' limit $sp,$nopage ";
 $result=$con->query($sql);
 if ($result->num_rows>0) {
     while ($row=$result->fetch_assoc()) {
@@ -72,7 +72,7 @@ if ($result->num_rows>0) {
         $ans=$row['crtans'];
 ?>
 <form action="tst.php?page=<?php echo ($page+1);?>&id=<?php echo$id;?>" method=POST>
-      <p>Q.<?php echo $page;?> <?php echo $qt;?></p>
+      <p>Q.<?php echo $qt;?></p>
       <p>
       <input type="hidden" name="quesid" value="<?php echo $qid;?>">
       <input type="hidden" name="ques"   value="<?php echo $qt;?>">
